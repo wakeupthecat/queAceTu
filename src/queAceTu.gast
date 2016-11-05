@@ -1,0 +1,419 @@
+#javaj#
+
+   <frames>
+      main, queAceTu Editando... v1.10, 900, 300
+
+   <layout of main>
+      EVA, 7, 7, 4, 4
+
+         , X
+         , layTopLine
+      X  , layResults
+         , lStatusLine
+
+   <layout of layTopLine>
+      EVA, 4, 4, 4, 4
+
+         , X        ,           , X
+         , layFolder, laySearch , -
+         ,  +       , rgEditor  , rgThema
+
+   <layout of laySearch>
+      EVA, 4, 4, 4, 4
+
+         ,                   ,          , X
+         , lText / expression, bRegexOnline, eSearch, bSearch, bNext6
+         , layExtensionsGroup,         -, -, -, -
+
+   <layout of layFolder>
+      EVA, 4, 4, 4, 4
+
+         ,        , X      ,
+         , lFolder, eFolder, bFolder
+      X  , iProjects, -    , -
+
+   <layout of layResults>
+      TABBED,
+
+      List    , iResults
+      Configuration & Help, layConfig
+      Console , oKonso
+
+   <layout of layExtensionsGroup>
+      PANEL, X, File extensions
+      layExtensions
+
+   <layout of layExtensions>
+      EVA, 4, 4, 4, 4
+
+         ,         ,     X        , 110
+         , rgSelExt, kgExtLang1   , lManual
+         , +       , kgExtScript1 , eManual
+
+   <layout of layConfig>
+      EVA, 4, 4, 4, 4
+
+         ,   X          ,
+         , xConfig      , layVersionNotes
+       X , +            , +
+         , bSaveConfig  , bHelp
+
+   <layout of layVersionNotes>
+      EVA, 10, 10, 6, 6,
+            ,
+            , lqueAceTu v1.1
+            , l(c) 2016 Alejandro Xalabarder
+            , lwww.wakeupthecat.com
+
+   <sysDefaultFonts>
+      Courier, 12, 0, TextField, TextArea
+
+#data#
+
+   <REGEXP_ONLINE_LINK> http://rubular.com/
+
+   <HELP_VAR>
+      @<:infile META-GASTONA/help/queAceTuHelp.mktes>
+
+   <main graffiti format>  trazos
+   <main graffiti var> icon
+
+   <bSearch graffiti format> trazos
+   <bSearch graffiti var> icon
+
+   <icon>
+      defstyle, lupa, "fc:+080118061;sw:8"
+      defstyle, papel, "fc:white;sw:8"
+      defstyle, notinta, "fc:none;sw:8"
+      defstyle, cristal, "fc:green;fo:.3;sw:12"
+
+      z,448,142,papel,"jau,-44,117,-2,123,-18,120,103,27,57,-1,25,-16,5,-29,5,-70,14,-42,18,-92,47,-107,-90,-27,-55,-2,-58,-2"
+      z,300,417,papel,"jau,20,-29,12,-44,2,-51,-11,-49,-1,-48,7,-49,17,-38,26,-17,48,-1,105,-1,56,12,-1,20,-33,27,-25,45,-4,53,0,61,-8,69,-7,57,4,35,-9,22,-21,-4,-17,-8,-46,-20,-61,-19,-51,-19"
+      z,361,146,notinta,"jau,32,-6,62,19,50,-4"
+      z,354,201,notinta,"jau,25,-17,49,13,47,-3"
+      z,361,230,notinta,"jau,16,-7,29,8,51,11"
+      z,525,314,cristal,"jau,17,-16,8,-24,0,-48,-20,-34,-25,-15,-37,-3,-34,9,-29,24,-9,21,1,31,16,36,27,21,31,10,34,-5,18,-6"
+      z,514,324,lupa,"jau,13,25,9,43,12,25,17,14,28,0,12,-20,-9,-28,-46,-53,-21,-16,-11,6,-1,4"
+
+   <TOO_MANY_LINES> 10000
+
+   <LINUX_EDIT_FILE_LINE>     //gedit @<file> +@<line>
+   <WINDOWS_EDIT_FILE_LINE>   //"C:\Program Files (x86)\Notepad++\notepad++.exe" "@<file>" -n@<line>
+
+   <LAUNCH_EDIT (file line)>
+      VAR=, file, @<p1>
+      VAR=, line, @<p2>
+      CHECK, LINUX, LAUNCH, @<WINDOWS_EDIT_FILE_LINE>
+      LAUNCH, @<LINUX_EDIT_FILE_LINE>
+
+   <lStatusLine> ""
+   
+   <bRegexOnline> (Regex online)
+
+   <rgEditor orientation> X
+   <rgEditor titledBorder> Editor
+   <rgEditor>
+      label          , cual     , selected, forceOnline
+      Ace            , ace      , 1       , no
+      Ace online     , ace      , 0       , yes
+      textarea       , textarea , 0       , no
+
+   <rgThema orientation> X
+   <rgThema titledBorder> Thema
+   <rgThema>
+      label          , cual            , selected
+      Kuroir         , kuroir          , 0
+      light          , solarized_light , 0
+      Cobalt         , cobalt          , 0
+      Merbivore      , merbivore       , 0
+      Terminal       , terminal        , 0
+      Tomorrow Nigth , tomorrow_nigth  , 0
+      dark           , solarized_dark  , 1
+
+   <rgSelExt orientation> Y
+   <rgSelExt titledBorder > Thema
+   <rgSelExt>
+      label    , selExt , selected
+      "All On" , allOn  , 0
+      "All Off", allOff , 0
+
+   <kgExtLang1 orientation> X
+   <kgExtLang1 var> tableExtensions1
+
+   <tableExtensions1>
+       label, selected
+       c    , 1
+       cpp  , 1
+       h    , 1
+       hpp  , 1
+       java , 1
+       js   , 1
+       php  , 1
+       txt  , 1
+
+   <kgExtScript1 orientation> X
+   <kgExtScript1 var> tableExtensions2
+
+   <tableExtensions2>
+        label , selected
+        gast  , 1
+        gasti , 1
+        gastDoc, 1
+        lsx   , 1
+        pl    , 1
+        py    , 1
+        html  , 1
+        css   , 1
+
+   <varFiles>
+
+   <iResults var> varFiles
+
+   <eSearch>
+   <lManual> //Extension,..
+
+   <bFolder image>  javaj\img\folder.png
+   <bFolder DIALOG> DIR
+   <bFolder widget> eFolder
+
+   <bNext6 enabled> 0
+
+   <iResults visibleColumns> fullPath
+
+   <THEME_FOR_ALL>
+      //solarized_dark
+
+   <LANGSYNTAX_FOR_ALL>
+      c_cpp
+
+   <iProjects>
+      path
+
+   <CFG_FILE> queAceTu.conf
+
+   <NFILE_START> 0
+
+   <xConfig fileName> :mem config
+
+   <PORT_micoHelpdoc> ""
+   <PORT_micoEditores> ""
+
+   <thePort>
+      VALUE OF, PORT_@<p1>
+
+#listix#
+
+   <LOAD_CONFIG>  LOAD, data, @<CFG_FILE>
+   <SAVE_CONFIG>  DUMP, data, @<CFG_FILE>, TOO_MANY_LINES, LINUX_EDIT_FILE_LINE, WINDOWS_EDIT_FILE_LINE, rgEditor, rgThema, rgSelExt, tableExtensions1, tableExtensions2, kgExtLang1, kgExtScript1, eSearch, iProjects, eManual, eFolder
+
+
+   <CONFIG_VAR_CONTENT>
+      //#data#
+      //
+      //   <LINUX_EDIT_FILE_LINE>
+      //      //@<:raw LINUX_EDIT_FILE_LINE>
+      //
+      //   <WINDOWS_EDIT_FILE_LINE>
+      //      //@<:raw WINDOWS_EDIT_FILE_LINE>
+      //
+      //   <tableExtensions1>
+      //       label
+      //
+      //
+      LOOP, VAR, tableExtensions1
+          ,, //       @<label>
+      //
+      //
+      //   <tableExtensions2>
+      //       label
+      //
+      //
+      LOOP, VAR, tableExtensions2
+          ,, //       @<label>
+      //
+      //
+      //   <iProjects>
+      //       path
+      //
+      //
+      LOOP, VAR, iProjects
+          ,, //       @<path>
+      //
+
+   <main0>
+      LSX, LOAD_CONFIG
+      VAR=, PORT_micoHelpdoc, ""
+      VAR=, PORT_micoEditores, ""
+      GEN, @<xConfig fileName>, CONFIG_VAR_CONTENT
+
+      <! open help the first time
+      CHECK, RFILE, @<CFG_FILE>, LSX, -- bHelp
+
+   <main>
+      -->, xConfig load
+
+   <-- bSaveConfig>
+      -->, xConfig save
+      LOAD, data, @<xConfig fileName>
+      -->, kgExtLang1 data!
+      -->, kgExtScript1 data!
+      -->, iProjects data!
+      JAVAJ, MASK
+
+   <-- javaj exit>
+      LSX, SAVE_CONFIG
+
+   <EDITOR_CONF_FILE> queAceTu_@<rgEditor selected.cual>.gasti
+
+   <-- bRegexOnline>
+      BROWSER, @<REGEXP_ONLINE_LINK>
+
+   <-- rgSelExt>
+      IN CASE, @<rgSelExt selected.selExt>
+             , allOn,  -->, kgExtScript1 select!, #, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9
+             , allOn,  -->, kgExtLang1 select!, #, 0, 1, 2, 3, 4, 5, 6, 7, 8, 9
+             , allOff,  -->, kgExtScript1 select!, #
+             , allOff,  -->, kgExtLang1 select!, #
+
+   <-- iProjects>
+      CHECK, VAR, iProjects selected.path
+      -->, eFolder data!,, @<iProjects selected.path>
+
+   <-- eFolder>
+      CHECK, !=, "", eFolder
+      VAR+, iProjects, @<eFolder>
+      -->, iProjects data!
+
+   <-- eSearch>   LSX, search
+   <-- bSearch>   LSX, search
+
+   <extensionsLang>
+      CHECK, VAR, kgExtLang1 subTableSelection, //---
+      LOOP, VAR, kgExtLang1 subTableSelection,
+          , LINK, ","
+          ,     , //@<label>
+
+   <extensionsScript>
+      CHECK, VAR, kgExtScript1 subTableSelection, //---
+      LOOP, VAR, kgExtScript1 subTableSelection,
+          , LINK, ","
+          ,     , //@<label>
+
+   <calc FOLDER_LENGTH> JS, //"@<eFolder>".length
+   <calc OFFSETROW>      =, //max(0, lineNr - TOO_MANY_LINES)
+
+   <search>
+      CHECK, DIR, @<eFolder>, BOX, I, //Cannot find folder @<eFolder>
+
+      -->, oKonso clear
+      VAR=, THEME_FOR_ALL, @<rgThema selected.cual>
+      VAR=, FORCE_ONLINEACE, @<rgEditor selected.forceOnline>
+      CHECK, RFILE, @<EDITOR_CONF_FILE>, BOX, E, //Cannot load editor, file @<EDITOR_CONF_FILE> not found!
+      LOAD, data, @<EDITOR_CONF_FILE>
+      -->, lStatusLine data!,, Using @<usingShow>
+
+      VAR=, FOLDER_LENGTH, @<calc FOLDER_LENGTH>
+
+      VAR=, varFiles, fullPath, pathLinux, lineNr, number, dirBaseLength, offsetRow
+      NUM=, cuentame, 0
+      LOOP, FILES, @<eFolder>, @<eManual>, @<extensionsLang>, @<extensionsScript>
+          , LINK, ""
+          ,, PARSONS, FILE2DB, @<fullPath>
+          ,,        , CLEAN, 1
+          ,,        , EVATABLE , tmpResults
+          ,,        ,        , lineStr, //@<eSearch>
+          ,,        , LIMIT RECORDS, 1
+          ,, LOOP, VAR, tmpResults
+          ,,     , HEAD, VAR+, varFiles, @<fullPath>, @<:linux-path fullPath>, @<lineNr>, @<cuentame>, @<FOLDER_LENGTH>, @<calc OFFSETROW>
+          ,,     , HEAD, NUM=, cuentame, cuentame + 1
+          ,,     , LINK, ""
+          ,,     ,, //
+
+      -->, iResults data!
+
+      CHECK, NUM, cuentame > 0, BOX, I, //No results!
+
+      NUM=, NFILE_START, 0
+      LSX, SHOW_UPTO_6_EDITORS
+
+   <-- bNext6>
+      NUM=, NFILE_START, NFILE_START + 6
+      LSX, SHOW_UPTO_6_EDITORS
+
+   <-- iResults>
+      CHECK, VAR, iResults selected.fullPath
+      CHECK, FILE, @<iResults selected.fullPath>
+      LSX, "LAUNCH_EDIT (file line)", @<iResults selected.fullPath>, 1
+
+   <-- bHelp>
+      LSX, OPEN_MICO, micoHelpdoc, help
+
+   <SHOW_UPTO_6_EDITORS>
+      NUM=, NN, //min(cuentame-NFILE_START, 6)
+      NUM=, MORE, NFILE_START + 6 < cuentame
+      -->, bNext6 control!, enabled, @<MORE>
+      LSX, OPEN_MICO, micoEditores, ace
+
+   <OPEN_MICO>
+      CHECK, !=, @<thePort>, ""
+           , ELSE, micoHTTP, START, @<p1>
+           , ELSE,         , MONOCLIENT, 1
+           , ELSE,         , ZIP FILES, queAceTu.jar, META-GASTONA/@<p2>
+           , ELSE, VAR=, PORT_@<p1>, mico, GET PORT, @<p1>
+      BROWSER, http://localhost:@<thePort>
+
+   <GET />
+      CHECK, !=, @<_myMicoName>, micoHelpdoc
+           , ELSE,  IN FILE, META-GASTONA/utilApp/std/simpleMarketeHelpHtml.lsx
+      IN FILE, queAceTuHTML.lsx
+
+   <POST /editPos>
+      VAR=, tmpPreResp, @<launchNotePad>
+
+   <POST /searchStr>
+      VAR=, tmpPreResp, @<searchThis>
+
+   <POST /getIdContent>
+      <! from textarea ...
+      LSX, SERVE_FILE(n), @<ajaxREQ-param>
+
+   <POST /getEditorContent>
+      <! from ace editor ...
+      LSX, SERVE_FILE(n), @<ajaxREQ-param>
+
+   <SERVE_FILE(n)>
+      LOOP, VAR, varFiles
+          , OFFSET, @<p1>
+          , ENDROW, @<p1>
+          ,, LSX, PRINT_FILE,  @<fullPath>
+
+   <searchThis>
+      -->, eSearch data!,, //@<GET_BODY_AS_STR>
+      LSX, search
+
+   <GET_BODY_AS_STR>
+      LOOP, TEXT FILE, @<_bodyMemFileName>
+          ,, //@<value>
+          ,, BREAK,,
+
+   <launchNotePad>
+      CHECK, VAR, ajaxREQ-fullpath
+      CHECK, FILE, @<ajaxREQ-fullpath>
+      CHECK, VAR, ajaxREQ-lineNr, VAR=, ajaxREQ-lineNr, 0
+          , CONTINUE, 1
+      LSX, "LAUNCH_EDIT (file line)", @<ajaxREQ-fullpath>, @<ajaxREQ-lineNr>
+
+   <PRINT_FILE>
+      LOOP, TEXT FILE, @<p1>
+          , OFFSET, //max(0, lineNr - TOO_MANY_LINES)
+          , ENDROW, //lineNr + TOO_MANY_LINES
+          , HEAD, CHECK, NUM, @<:lsx ROW> = 0, LSX, MSG_TOOMANYLINES
+          , TAIL, CHECK, NUM, @<:lsx ROW>+1 >= @<:lsx ROWS>, LSX, MSG_TOOMANYLINES
+          ,, //@<:raw value>
+
+   <MSG_TOOMANYLINES>
+      //
+      // ************* FILE TOO LARGE, CONTENT TRUNCATED !!
+      //
+
+#**#

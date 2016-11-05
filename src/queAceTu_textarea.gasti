@@ -1,0 +1,100 @@
+   ======= queAceTu_textarea.gasti
+
+   Code for the editor using standard html textarea
+
+#data#
+
+   <usingShow>  //html textarea
+   <tagforEdit> //textarea
+
+   <EDITOR_ELEMTYPE> x
+
+   <! NEEDED in textarea IN ORDER TO HAVE horizontal scrollbar!!
+   <! white-space: nowrap;
+
+   <INSERT_CSS>
+      //
+      //   textarea {
+      //      font: 11px/normal  'Consolas', 'Monaco', 'Menlo', 'Ubuntu Mono', 'source-code-pro', monospace;
+      //      color: #A9B3B3;
+      //      background-color: #002B36;
+      //      padding: 4px;
+      //      white-space: nowrap;
+      //   }
+      //
+
+
+   <INSERT_JS>
+      //   function selectedFrom (name)
+      //   {
+      //      var oo = document.getElementById(name);
+      //      if (document.selection != undefined)
+      //      {
+      //         oo.focus();
+      //         return document.selection.createRange().text;
+      //      }
+      //      if (oo.selectionStart != undefined)
+      //      {
+      //         return oo.value.substring(oo.selectionStart, oo.selectionEnd)
+      //      }
+      //      return "";
+      //   }
+      //   var firstClick = false;
+      //
+      //   function selectText (nEd)
+      //   {
+      //      var edi = document.getElementById ("xEdi" + nEd);
+      //      var strsel = selectedFrom ("xEdi"+nEd);
+      //      console.log ("click strsel [" + strsel + "]");
+      //      if (strsel && strsel !== '') {
+      //          jgast.AJAXPost ("searchStr", strsel);
+      //      }
+      //   }
+      //
+      //   function clickText (nEd)
+      //   {
+      //      if (!firstClick) {
+      //          firstClick = true;
+      //          setTimeout (function() { firstClick = false; }, 1400); // allow "slow" double click to avoid selecting something
+      //      }
+      //      else {
+      //          // decide it is a double click
+      //          firstClick = false;
+      //          openOnEditor (nEd);
+      //      }
+      //   }
+      //
+      //   function openOnEditor (nEd)
+      //   {
+      //      var edi = document.getElementById ("xEdi" + nEd);
+      //      var rown = 1; // Estimation of row number ?
+      //      jgast.AJAXPost ("editPos", "",
+      //              { "ajaxREQ-fullpath": edi.documentFullPath,
+      //                "ajaxREQ-lineNr": rown }); // 
+      //   }
+      //
+      //   function initialize ()
+      //   {
+      //       var ele, pixChar = 22; // ? where to get this ? ~ heightOfChar ("X") + space between lines
+      //
+      LOOP, VAR, varFiles
+          , OFFSET, NFILE_START
+          , ENDROW, NFILE_START+5
+          ,, NUM=, edIndx, @<:lsx ROW> - NFILE_START
+          ,,  //      document.getElementById("lEdi@<edIndx>").innerHTML = '@<pathLinux>'.substring(@<dirBaseLength>);
+          ,,  //      ele = document.getElementById ("xEdi" + @<edIndx>);
+          ,,  //      ele.onselect = function () { selectText (@<edIndx>); };
+          ,,  //      ele.onclick = function () { clickText (@<edIndx>); };
+          ,,  //      ele.documentFullPath = '@<pathLinux>';
+          ,,  //      ele.offsetRow = @<offsetRow>;
+          ,,  //      var pixChar = ele.clientHeight / ele.rows ;
+          ,,  //      ele.scrollTop = Math.max (0, @<lineNr> * pixChar - ele.clientHeight / 2);
+          ,, //       jgast.AJAXgetIdContent ("xEdi" + @<edIndx>, "" + @<number>, false);
+      //
+      //   }
+
+   <LINKS JS_LIBS>
+      //
+
+   <INSERT JS>
+      //

@@ -1,0 +1,117 @@
+   ======= queAceTu_ace.gasti
+
+   Code for the editor using ACE editor
+
+#data#
+
+
+   <EDITOR_ELEMTYPE> d
+
+   <usingShow>  //@<ACE_JS_FILE>
+   <tagforEdit> //pre
+
+   <ONLINE_ACE> //https://cdnjs.cloudflare.com/ajax/libs/ace/1.1.8/ace.js
+
+   <ACE_JS_FILE>
+      CHECK, ==, @<FORCE_ONLINEACE>, no, @<ONLINE_ACE>
+      CHECK, RFILE, META-GASTONA/ace/ace.js, @<ONLINE_ACE>
+      //ace.js
+
+      <! NOTE:
+      <! we check for the location within the jar file META-GASTONA/ace/ace.js
+      <! but if exists we only have to load from META-GASTONA/ace (given in MICO START ZIP option)
+      <! that is : ace.js
+      <!
+
+   <INSERT_CSS>
+
+   <INSERT_JS>
+      //   var editores = [];
+      //   var firstClick = false;
+      //
+      //   function selectedFrom (oo)
+      //   {
+      //      //NOTE: not all versions of ace editor provide getSelectedText !! (!?)
+      //      if (typeof oo.getSelectedText === 'function')
+      //         return oo.getSelectedText ();
+      //      if (oo.selection)
+      //         return oo.getSession().doc.getTextRange(oo.selection.getRange());
+      //      return "";
+      //   }
+      //
+      //   function onCLickOnEditor (nEd)
+      //   {
+      //      var strsel = selectedFrom (editores[nEd]);
+      //      if (strsel && strsel !== '') {
+      //          jgast.AJAXPost ("searchStr", strsel);
+      //          return;
+      //      }
+      //
+      //      if (!firstClick) {
+      //          firstClick = true;
+      //          setTimeout (function() { firstClick = false; }, 1400); // allow "slow" double click to avoid selecting something
+      //      }
+      //      else {
+      //          // decide it is a double click
+      //          firstClick = false;
+      //          openOnEditor (nEd);
+      //      }
+      //   }
+      //
+      //   function openOnEditor (nEd)
+      //   {
+      //      jgast.AJAXPost ("editPos", "",
+      //          { "ajaxREQ-fullpath": editores[nEd].documentFullPath,
+      //            "ajaxREQ-lineNr":  editores[nEd].getCursorPosition ().row + editores[nEd].offsetRow });
+      //   }
+      //
+      //   function textHasChanged (nEd)
+      //   {
+      //       if (editores[nEd].brandnewFlag)
+      //       {
+      //           setTimeout (alert ("NOTE: CHANGES WILL NOT BE SAVED! do a \"slow double click\" or press the top right button to open the file in your configured editor."), 600);
+      //           jgast.setData ("lEdi"+(nEd), "*** CHANGES WILL NOT BE SAVED! Use the your configured editor instead.");
+      //           editores[nEd].brandnewFlag = false;
+      //       }
+      //   }
+      //
+      //   function setEditorContent (nEdi, text, firstLineNr)
+      //   {
+      //      editores[nEdi].brandnewFlag = false;
+      //      editores[nEdi].setValue (text);
+      //      editores[nEdi].gotoLine (firstLineNr);
+      //      editores[nEdi].findAll (/@<eSearch>/g, { regExp: true });
+      //      editores[nEdi].brandnewFlag = true;
+      //   }
+      //
+      //   function initialize ()
+      //   {
+      //
+      LOOP, VAR, varFiles
+          , OFFSET, NFILE_START
+          , ENDROW, NFILE_START+5
+          ,, NUM=, edIndx, @<:lsx ROW> - NFILE_START
+          ,, //      editores[@<edIndx>] = ace.edit ("dEdi" + (@<edIndx>));
+          ,, //
+          ,, //      editores[@<edIndx>].setTheme("ace/theme/@<THEME_FOR_ALL>");
+          ,, //      editores[@<edIndx>].getSession().setMode("ace/mode/@<LANGSYNTAX_FOR_ALL>");
+          ,, //      editores[@<edIndx>].$blockScrolling = Infinity; // avoids automatic scrolling down when calling findAll
+          ,, //
+          ,, //      document.getElementById("lEdi" + @<edIndx>).innerHTML = '@<pathLinux>'.substring(@<dirBaseLength>);
+          ,, //
+          ,, //      editores[@<edIndx>].resize (true); // seems to be necessary ...
+          ,, //      editores[@<edIndx>].documentFullPath = '@<pathLinux>';
+          ,, //      editores[@<edIndx>].offsetRow = @<offsetRow>;
+          ,, //      editores[@<edIndx>].on ("click", function () { onCLickOnEditor(@<edIndx>); } );
+          ,, //      editores[@<edIndx>].getSession().on('change', function () { textHasChanged (@<edIndx>); });
+          ,, //      jgast.AJAXPost ("getEditorContent", "", { "ajaxREQ-param": "" + @<number> }, function (content) { setEditorContent (@<edIndx>, content, 1 + @<lineNr>); });
+      //
+      //   }
+      //
+
+   <LINKS JS_LIBS>
+      //
+      //    <script src="@<ACE_JS_FILE>" type="text/javascript" charset="utf-8"></script>
+      //
+
+#**#

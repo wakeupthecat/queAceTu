@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <title>que:@<eSearch></title>
+      <style type="text/css">
+         html
+         {
+           -webkit-box-sizing: border-box;
+           -moz-box-sizing: border-box;
+           box-sizing: border-box;
+         }
+         *, *:before, *:after
+         {
+           -webkit-box-sizing: inherit;
+           -moz-box-sizing: inherit;
+           box-sizing: inherit;
+         }
+
+         body {
+            background-color: black;
+         }
+
+         label, button {
+            font: 11px/normal 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', 'source-code-pro', monospace;
+            color: #5BDEFF;
+            background-color: #00647D;
+            padding: 4px;
+          }
+
+         ::-webkit-scrollbar {
+             width: 5px;
+             height: 5px
+         }
+         ::-webkit-scrollbar-button {
+             background: #02A4D2
+         }
+         ::-webkit-scrollbar-track-piece {
+             background: #015465
+         }
+         ::-webkit-scrollbar-thumb {
+             background: #1A849C
+         }
+
+@<INSERT_CSS>
+
+      </style>
+   </head>
+<body>
+
+@<LINKS JS_LIBS>
+
+   <script>
+
+@<:infile META-GASTONA/js/jGastonaEva-min.js>
+
+@<INSERT_JS>
+
+      // ==== function makeJGast (num)
+      // generates directly as javascript object the script for jGastona 
+      // depending on the number of editors (1 to 6)
+      // 
+      // for example for n == 4 it would be (in eva format) something like
+      //
+      // #layouts#
+      //
+      //   <main>
+      //   EVA, 6, 6, 6, 6
+      //
+      //      , X    ,       , X
+      //      , lEdi0, bOpen0, lEdi1, bOpen1
+      //    X , dEdi0, -     , dEdi1, -
+      //      , lEdi2, bOpen2, lEdi3, bOpen3
+      //    X , dEdi2, -     , dEdi3, -
+      //
+      // #data#
+      //
+      //  <bOpen0> ""
+      //  ...
+      //
+      // #listix#
+      //
+      //  <-- ajaxResponse getEditorContent>
+      //
+      //  <-- bOpen0> openOnEditor(0)
+      //  ...
+      //
+      function makeJGast (num)
+      {
+         var prefixEdi = "@<EDITOR_ELEMTYPE>Edi";
+
+         var jconf = { layouts: { 
+                          main: [
+                               [ "EVA", 6, 6, 6, 6],
+                               [ ""   , "X", 20, "X", 20 ],
+                              ]
+                        },
+
+                        data: {
+                        },
+
+                        listix: {
+                           "-- ajaxResponse getEditorContent": [[ "" ]]
+                        }
+                     };
+
+         for (var ii = 0; ii < num; ii += 2) {
+            // either   , lEdiX, bOpenX, lEdiX+1, bOpenX+1
+            // or       , lEdiX,      -,     -  , bOpenX
+            var two = (ii+1 < num);
+            jconf.layouts.main.push ([ ""  , "lEdi"+ii, 
+                                             (two) ? ("bOpen"+ii) : "-",
+                                             (two) ? ("lEdi"+(ii+1)): "-",
+                                             (two) ? ("bOpen"+(ii+1)): ("bOpen"+ii) ]);
+            jconf.layouts.main.push ([ "X" , prefixEdi+ii, "-"    , (two) ? (prefixEdi+(ii+1)): "-", "-" ]);
+
+            jconf.data["bOpen"+ii] = [[ ""]];
+            jconf.listix["-- bOpen"+ii] = [[ "openOnEditor (" + ii + ")"]];
+            if (two)
+            {
+               jconf.data["bOpen"+(1+ii)] = [[ ""]];
+               jconf.listix["-- bOpen"+(1+ii)] = [[ "openOnEditor (" + (1+ii) + ")"]];
+            }
+         }
+
+         return jconf;
+      }
+
+      var jgast = jGastona (makeJGast (@<NN>));
+
+      window.addEventListener("load", initialize);
+      document.body.onresize = jgast.adapta; // why is not working auto-adapta from jGastona ??
+
+      </script>
+</body>
+</html>

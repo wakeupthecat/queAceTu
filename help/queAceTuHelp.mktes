@@ -1,0 +1,114 @@
+#h queAceTu code navigator v 1.1
+
+## Introduction
+
+queAceTu is a simple and rapid code viewer for any language
+and for any project (IDE agnostic or IDE-less) and works
+on windows, linux and Raspberry Pi.
+
+Almost all IDEs and editors in Software development permit searches
+of text. What is not common is openning several files in a window
+as result of a single search. And this is a very convenient behavior
+in many scenarios while developing or simply examining code.
+
+queAceTu offers this "one shot" result openning the affected files at the
+same time (up to six at a time) and allows next searches just by double
+click on the results. All searches are kept since each one opens a new tab
+in the browser.
+
+In summary, it is a very efficient and ergonomic way of examining code spread
+in multiple files.
+
+## Operations
+
+Following self-explanatory snapshot shows the steps to operate with queAceTu. 
+
+   <img width="900px" src="queAceTuGUI.PNG"></img>
+
+some points to notice about the GUI
+
+<ul><li>If we press enter in the folder input, the folder is added to the history list
+<li>Pressing enter in the search input launches directly the search
+<li>Additionaly to the extensions in checkboxes the field on the right side can be used to enter manually a set of comma separated extensions
+<li>Note that selecting "All off", being the manual input empty, it has the meaning of NO FILTER, so all file extensions will be parsed for results.
+</ul>
+
+the tool remembers the last state by writting the file queAceTu.conf file on its exit.
+
+## Configurations
+
+A couple of things like the user editor or extension filters can be configured. For that just open 
+the tab "Configuration & Help" edit the proper values and press the button "SaveConfig".
+
+NOTE! When changing configurations is convenient having only one instance of queAceTu openned
+otherwise the desired configuration could be overwritten by another instance.
+
+In case something goes wrong with the configurations it can be repaired easily: Close all instances
+of queAceTu, restore the queAceTu.conf if you have a copy or simply remove the file to return to 
+the default configuration.
+
+### Extensions
+
+Set the extenions you want by changing the tables <tableExtensions1> and <tableExtensions2>
+you can add, delete and change entries except the first one ("label"), which is actually the 
+column name. For example
+
+
+      <tableExtensions1>
+         label
+
+         js
+         css
+         htm
+         hmtl
+
+### User editor
+
+queAceTu is great for searching and navigating through the code files but it actually
+does not support modifying and saving changes directly. It is ok since everyone 
+wants to use its own editor for that. Also in order to avoid overloading the browser
+huge files are truncated in the result window, so in this cases saving changes would be impossible.
+
+The default user editor for windows is Notepad++ and gedit for Linux.
+
+In order to change a user editor first you have to know the command line of the
+editor that opens a file in a specific line. For example for Notepad++ the syntax is
+
+         notepad++.exe filename -nXX
+
+where XX has to be changed with the line number, and for gedit
+
+         gedit filename +XX
+
+This can be written in following way in the the configuration
+
+      <WINDOWS_EDIT_FILE_LINE>
+         //"C:\Program Files (x86)\Notepad++\notepad++.exe" "@<file>" -n@<line>
+
+      <LINUX_EDIT_FILE_LINE>
+         //gedit @<file> +@<line>
+
+## Licenses and content of queAceTu.jar
+
+queAceTu.jar is a Gastona application that contains also ACE Editor sources
+
+ <a href="https://github.com/wakeupthecat/gastona">github.com/wakeupthecat/gastona</a><br>
+ <a href="http://www.wakeupthecat.com">www.wakeupthecat.com</a><br>
+ <a href="https://github.com/ajaxorg/ace">github.com/ajaxorg/ace</a><br>
+
+License information of software provided can be found at the files
+
+      LICENSES_README.txt
+      LICENSE_ACE_EDITOR.txt
+      LICENSE_GPLv3.txt
+
+ACE Editor is located at 
+
+      META-GASTONA/ace
+      
+The rest is gastona.jar and the specific scripts for queAceTu 
+
+      queAceTu.gast
+      queAceTu_ace.gasti
+      queAceTu_textarea.gasti
+      queAceTuHTML.lsx
