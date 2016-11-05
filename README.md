@@ -23,10 +23,13 @@ the first time the application is launched it opens also a Help site in the brow
 
 ## Modifying the script (src)
 
-For doing changes in the script itself (folder src) copy the changed file, for instance
-queAceTuHTML.lsx or queAceTu.gast or both etc, or extract them from queAceTu.jar file
-in the same folder.
+For doing changes in the script itself (folder src) copy the wanted file or files, for instance
+queAceTuHTML.lsx, queAceTu.gast etc, you may extract them also from queAceTu.jar and put them
+in the same folder. Make the desired modifications and test it just running queAceTu.jar.
 
-When launching now queAceTu.jar the changes will be take into account. This 
-is because the copies found in the directory are used instead of loading the equivalent 
+Now on launching queAceTu.jar the changes are taken into account because when loading scripts
+or resources the files found in the directory are used instead of loading the equivalent 
 files from the jar. 
+
+To have a single jar containing the changes just pack the files into the existing jar. For that
+you can use a tool like 7z or similar.
