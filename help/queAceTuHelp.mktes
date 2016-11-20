@@ -1,27 +1,25 @@
-#h queAceTu code navigator v 1.1
+#h queAceTu code finder v 1.1
 
 ## Introduction
 
-queAceTu is a simple and rapid code viewer for any language
-and for any project (IDE agnostic or IDE-less) and works
-on windows, linux and Raspberry Pi.
+Open your files with the "eye" of a developer
 
-Almost all IDEs and editors in Software development permit searches
-of text. What is not common is openning several files in a window
-as result of a single search. And this is a very convenient behavior
-in many scenarios while developing or simply examining code.
+queAceTu is a simple text search tool with the
+particular ability of showing and keeping multiple
+files pointed to the matches just using few clicks.
+   
+Thought mainly for software development where the logic
+of a particular feature or issue is usually spread in 
+two or more files.
 
-queAceTu offers this "one shot" result openning the affected files at the
-same time (up to six at a time) and allows next searches just by double
-click on the results. All searches are kept since each one opens a new tab
-in the browser.
-
-In summary, it is a very efficient and ergonomic way of examining code spread
-in multiple files.
+The results are opened in the browser in one or more html editors 
+using either textarea or preferably ACE Editor which is included in 
+the tool. For that queAceTu uses an own mini http server that interacts
+locally with the browser.
 
 ## Operations
 
-Following self-explanatory snapshot shows the steps to operate with queAceTu. 
+Next picture shows the steps to operate with queAceTu.
 
    <img width="900px" src="queAceTuGUI.PNG"></img>
 
@@ -40,11 +38,11 @@ the tool remembers the last state by writting the file queAceTu.conf file on its
 A couple of things like the user editor or extension filters can be configured. For that just open 
 the tab "Configuration & Help" edit the proper values and press the button "SaveConfig".
 
-NOTE! When changing configurations is convenient having only one instance of queAceTu openned
+NOTE! When changing configurations is convenient having only one instance of queAceTu opened
 otherwise the desired configuration could be overwritten by another instance.
 
 In case something goes wrong with the configurations it can be repaired easily: Close all instances
-of queAceTu, restore the queAceTu.conf if you have a copy or simply remove the file to return to 
+of queAceTu, restore the queAceTu.conf if you have a copy or simply rename or remove the file to return to 
 the default configuration.
 
 ### Extensions
@@ -92,6 +90,7 @@ This can be written in following way in the the configuration
 
 queAceTu.jar is a Gastona application that contains also ACE Editor sources
 
+ <a href="https://github.com/wakeupthecat/queAceTu">github.com/wakeupthecat/queAceTu</a><br>
  <a href="https://github.com/wakeupthecat/gastona">github.com/wakeupthecat/gastona</a><br>
  <a href="http://www.wakeupthecat.com">www.wakeupthecat.com</a><br>
  <a href="https://github.com/ajaxorg/ace">github.com/ajaxorg/ace</a><br>

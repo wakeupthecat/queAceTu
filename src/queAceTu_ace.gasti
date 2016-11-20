@@ -39,11 +39,12 @@
       //      return "";
       //   }
       //
-      //   function onCLickOnEditor (nEd)
+      //   function onCLickOnEditor (ev, nEd)
       //   {
       //      var strsel = selectedFrom (editores[nEd]);
+      //      // ev.which === 1 left button
       //      if (strsel && strsel !== '') {
-      //          jgast.AJAXPost ("searchStr", strsel);
+      //          jgast.AJAXPost ("searchStr", "", { 'ajaxREQ-Str': strsel });
       //          return;
       //      }
       //
@@ -102,7 +103,7 @@
           ,, //      editores[@<edIndx>].resize (true); // seems to be necessary ...
           ,, //      editores[@<edIndx>].documentFullPath = '@<pathLinux>';
           ,, //      editores[@<edIndx>].offsetRow = @<offsetRow>;
-          ,, //      editores[@<edIndx>].on ("click", function () { onCLickOnEditor(@<edIndx>); } );
+          ,, //      editores[@<edIndx>].on ("click", function (ev) { onCLickOnEditor(ev, @<edIndx>); } );
           ,, //      editores[@<edIndx>].getSession().on('change', function () { textHasChanged (@<edIndx>); });
           ,, //      jgast.AJAXPost ("getEditorContent", "", { "ajaxREQ-param": "" + @<number> }, function (content) { setEditorContent (@<edIndx>, content, 1 + @<lineNr>); });
       //

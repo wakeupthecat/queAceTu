@@ -16,8 +16,8 @@
          |---- autoStart.gast
          |---- LICENSES_README.txt
          |---- LICENSE_ACE_EDITOR.txt
-         |---- queAceTu.gast
          |---- queAceTuHTML.lsx
+         |---- queAceTu.gast
          |---- queAceTu_ace.gasti
          |---- queAceTu_textarea.gasti
          |

@@ -1,7 +1,7 @@
 #javaj#
 
    <frames>
-      main, queAceTu Editando... v1.10, 900, 300
+      main, queAceTu Editando... v1.20, 900, 300
 
    <layout of main>
       EVA, 7, 7, 4, 4
@@ -9,14 +9,14 @@
          , X
          , layTopLine
       X  , layResults
-         , lStatusLine
+<!         , bOpenAll, lStatusLine,
 
    <layout of layTopLine>
       EVA, 4, 4, 4, 4
 
          , X        ,           , X
          , layFolder, laySearch , -
-         ,  +       , rgEditor  , rgThema
+         ,  +       , rgEditor  , rgTheme
 
    <layout of laySearch>
       EVA, 4, 4, 4, 4
@@ -35,9 +35,17 @@
    <layout of layResults>
       TABBED,
 
-      List    , iResults
+      List    , layFileList
       Configuration & Help, layConfig
       Console , oKonso
+
+   <layout of layFileList>
+      EVA, 4, 4, 3, 3
+
+         , X       , X
+         , lFileList, lTree structure
+       X , iResults, aResults
+         , bOpenAll, +
 
    <layout of layExtensionsGroup>
       PANEL, X, File extensions
@@ -70,7 +78,7 @@
 
 #data#
 
-   <REGEXP_ONLINE_LINK> http://rubular.com/
+   <REGEXP_ONLINE_LINK> //http://rubular.com/
 
    <HELP_VAR>
       @<:infile META-GASTONA/help/queAceTuHelp.mktes>
@@ -110,6 +118,8 @@
    
    <bRegexOnline> (Regex online)
 
+   <bOpenAll> List all results
+
    <rgEditor orientation> X
    <rgEditor titledBorder> Editor
    <rgEditor>
@@ -118,9 +128,9 @@
       Ace online     , ace      , 0       , yes
       textarea       , textarea , 0       , no
 
-   <rgThema orientation> X
-   <rgThema titledBorder> Thema
-   <rgThema>
+   <rgTheme orientation> X
+   <rgTheme titledBorder> Theme
+   <rgTheme>
       label          , cual            , selected
       Kuroir         , kuroir          , 0
       light          , solarized_light , 0
@@ -131,7 +141,6 @@
       dark           , solarized_dark  , 1
 
    <rgSelExt orientation> Y
-   <rgSelExt titledBorder > Thema
    <rgSelExt>
       label    , selExt , selected
       "All On" , allOn  , 0
@@ -169,6 +178,8 @@
 
    <iResults var> varFiles
 
+   <aResults var> varFiles
+
    <eSearch>
    <lManual> //Extension,..
 
@@ -195,17 +206,14 @@
 
    <xConfig fileName> :mem config
 
-   <PORT_micoHelpdoc> ""
-   <PORT_micoEditores> ""
-
    <thePort>
+      CHECK, VAR, PORT_@<p1>, ""
       VALUE OF, PORT_@<p1>
 
 #listix#
 
    <LOAD_CONFIG>  LOAD, data, @<CFG_FILE>
-   <SAVE_CONFIG>  DUMP, data, @<CFG_FILE>, TOO_MANY_LINES, LINUX_EDIT_FILE_LINE, WINDOWS_EDIT_FILE_LINE, rgEditor, rgThema, rgSelExt, tableExtensions1, tableExtensions2, kgExtLang1, kgExtScript1, eSearch, iProjects, eManual, eFolder
-
+   <SAVE_CONFIG>  DUMP, data, @<CFG_FILE>, main, TOO_MANY_LINES, LINUX_EDIT_FILE_LINE, WINDOWS_EDIT_FILE_LINE, REGEXP_ONLINE_LINK, rgEditor, rgTheme, rgSelExt, tableExtensions1, tableExtensions2, kgExtLang1, kgExtScript1, eSearch, iProjects, eManual, eFolder
 
    <CONFIG_VAR_CONTENT>
       //#data#
@@ -215,6 +223,12 @@
       //
       //   <WINDOWS_EDIT_FILE_LINE>
       //      //@<:raw WINDOWS_EDIT_FILE_LINE>
+      //
+      //   <REGEXP_ONLINE_LINK>
+      //      //@<:raw REGEXP_ONLINE_LINK>
+      //
+      //   <TOO_MANY_LINES>
+      //      //@<:raw TOO_MANY_LINES>
       //
       //   <tableExtensions1>
       //       label
@@ -242,12 +256,8 @@
 
    <main0>
       LSX, LOAD_CONFIG
-      VAR=, PORT_micoHelpdoc, ""
-      VAR=, PORT_micoEditores, ""
       GEN, @<xConfig fileName>, CONFIG_VAR_CONTENT
-
-      <! open help the first time
-      CHECK, RFILE, @<CFG_FILE>, LSX, -- bHelp
+      CHECK, LINUX, VAR=, aResults separator, \
 
    <main>
       -->, xConfig load
@@ -287,6 +297,11 @@
    <-- eSearch>   LSX, search
    <-- bSearch>   LSX, search
 
+   <-- rgTheme>
+      VAR=, THEME_FOR_ALL, @<rgTheme selected.cual>
+      //BOX, I, Macho @<THEME_FOR_ALL>
+      LSX, SHOW_UPTO_6_EDITORS
+
    <extensionsLang>
       CHECK, VAR, kgExtLang1 subTableSelection, //---
       LOOP, VAR, kgExtLang1 subTableSelection,
@@ -299,24 +314,24 @@
           , LINK, ","
           ,     , //@<label>
 
-   <calc FOLDER_LENGTH> JS, //"@<eFolder>".length
-   <calc OFFSETROW>      =, //max(0, lineNr - TOO_MANY_LINES)
+   <calc FOLDER_LENGTH> JS, //var len = "@<:path-linux eFolder>".length; (len === 0) ? 0: len+1;
+   <calc OFFSETROW>     JS, //Math.max(0, @<lineNr> - @<TOO_MANY_LINES>)
 
    <search>
       CHECK, DIR, @<eFolder>, BOX, I, //Cannot find folder @<eFolder>
 
       -->, oKonso clear
-      VAR=, THEME_FOR_ALL, @<rgThema selected.cual>
+      VAR=, THEME_FOR_ALL, @<rgTheme selected.cual>
       VAR=, FORCE_ONLINEACE, @<rgEditor selected.forceOnline>
       CHECK, RFILE, @<EDITOR_CONF_FILE>, BOX, E, //Cannot load editor, file @<EDITOR_CONF_FILE> not found!
       LOAD, data, @<EDITOR_CONF_FILE>
-      -->, lStatusLine data!,, Using @<usingShow>
+<!      -->, lStatusLine data!,, Using @<usingShow>
 
       VAR=, FOLDER_LENGTH, @<calc FOLDER_LENGTH>
 
       VAR=, varFiles, fullPath, pathLinux, lineNr, number, dirBaseLength, offsetRow
       NUM=, cuentame, 0
-      LOOP, FILES, @<eFolder>, @<eManual>, @<extensionsLang>, @<extensionsScript>
+      LOOP, FILES, @<eFolder>, @<extensionsLang>, @<extensionsScript>, @<eManual>
           , LINK, ""
           ,, PARSONS, FILE2DB, @<fullPath>
           ,,        , CLEAN, 1
@@ -329,7 +344,9 @@
           ,,     , LINK, ""
           ,,     ,, //
 
+      -->, lFileList data!,, //@<cuentame> files found
       -->, iResults data!
+      -->, aResults data!
 
       CHECK, NUM, cuentame > 0, BOX, I, //No results!
 
@@ -340,14 +357,25 @@
       NUM=, NFILE_START, NFILE_START + 6
       LSX, SHOW_UPTO_6_EDITORS
 
-   <-- iResults>
+   <-- iResults 2>
       CHECK, VAR, iResults selected.fullPath
-      CHECK, FILE, @<iResults selected.fullPath>
-      LSX, "LAUNCH_EDIT (file line)", @<iResults selected.fullPath>, 1
+      LSX, OPEN_ONE_FILE, @<iResults selected.fullPath>
+
+   <-- aResults 2>
+      CHECK, VAR, aResults selectedPath
+      LSX, OPEN_ONE_FILE, @<aResults selectedPath>
 
    <-- bHelp>
       LSX, OPEN_MICO, micoHelpdoc, help
 
+   <-- bOpenAll>
+      LSX, OPEN_MICO, micoAllMatches, help
+
+   <OPEN_ONE_FILE>
+      CHECK, FILE, @<p1>
+      LSX, "LAUNCH_EDIT (file line)", @<p1>, 1
+      
+      
    <SHOW_UPTO_6_EDITORS>
       NUM=, NN, //min(cuentame-NFILE_START, 6)
       NUM=, MORE, NFILE_START + 6 < cuentame
@@ -365,6 +393,8 @@
    <GET />
       CHECK, !=, @<_myMicoName>, micoHelpdoc
            , ELSE,  IN FILE, META-GASTONA/utilApp/std/simpleMarketeHelpHtml.lsx
+      CHECK, !=, @<_myMicoName>, micoAllMatches
+           , ELSE,  LSX, ALL_MATCHES
       IN FILE, queAceTuHTML.lsx
 
    <POST /editPos>
@@ -388,13 +418,8 @@
           ,, LSX, PRINT_FILE,  @<fullPath>
 
    <searchThis>
-      -->, eSearch data!,, //@<GET_BODY_AS_STR>
+      -->, eSearch data!,, //@<:encode-regex ajaxREQ-Str>
       LSX, search
-
-   <GET_BODY_AS_STR>
-      LOOP, TEXT FILE, @<_bodyMemFileName>
-          ,, //@<value>
-          ,, BREAK,,
 
    <launchNotePad>
       CHECK, VAR, ajaxREQ-fullpath
@@ -415,5 +440,67 @@
       //
       // ************* FILE TOO LARGE, CONTENT TRUNCATED !!
       //
+
+   <ALL_MATCHES>
+      JS, @<ESCRIPT>
+      //
+      // <script>
+      //   var firstClick = false;
+      //   function clickText (elem, fileName, line)
+      //   {
+      //      if (!firstClick) {
+      //          firstClick = true;
+      //          setTimeout (function() { firstClick = false; }, 1400); // allow "slow" double click to avoid selecting something
+      //      }
+      //      else {
+      //          // decide it is a double click
+      //          firstClick = false;
+      //          //openFileAtLine (fileName, line);
+      //          //alert ("open file [" + fileName + "] at line " + line);
+      //          ajaxPost ("editPos", "",
+      //                  { "ajaxREQ-fullpath": fileName,
+      //                    "ajaxREQ-lineNr": line });
+      //      }
+      //   }
+      //
+      //   function ajaxPost(postName, body, optHeaders, respFunc)
+      //   {
+      //      var htepo = (window.XMLHttpRequest) ? new XMLHttpRequest(): (window.ActiveXObject) ? new ActiveXObject("Microsoft.XMLHTTP"): null;
+      //      if (htepo == null) { alert("not supported XMLHTTP!"); return; }
+      //      htepo.onreadystatechange = function () {
+      //            if (htepo.readyState === 4) {
+      //               if (htepo.status === 200) {
+      //                  if (respFunc) respFunction (htepo.responseText, htepo);
+      //               }
+      //            }
+      //         }
+      //
+      //      htepo.open("POST", postName, true);
+      //      if (optHeaders) {
+      //         for (var indx in optHeaders)
+      //            htepo.setRequestHeader(indx, optHeaders[indx]);
+      //      }
+      //      htepo.send(body || "");
+      //   }
+      //
+      // </script>
+
+   <ESCRIPT>
+      //@<:infile fileToRangos.js>
+      //@<:infile coderetails.js>
+      //
+      // var sali = [];
+      //
+      LOOP, VAR, @<CHOOSE_TABLE_FILESWITHTRACKS>
+          ,, //fileToRangos ("@<:path-linux fullPath>", /@<eSearch>/g, sali);
+      //
+      // coderetails (fileStr ("", sali), /@<eSearch>/g);
+
+   <CHOOSE_TABLE_FILESWITHTRACKS>
+      CHECK, VAR, iResults subTableSelection, varFiles
+      LOOP, VAR, iResults subTableSelection
+          , LINK, ""
+          , HEAD, iResults subTableSelection
+          , IFEMPTY, varFiles
 
 #**#

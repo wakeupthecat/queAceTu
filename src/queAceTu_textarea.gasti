@@ -25,6 +25,13 @@
 
 
    <INSERT_JS>
+      //
+      //    if (typeof String.prototype.trimTail !== 'function') {
+      //      String.prototype.trimTail = function() {
+      //         return this.replace(/\s+$/g, '');
+      //      }
+      //   }
+      //
       //   function selectedFrom (name)
       //   {
       //      var oo = document.getElementById(name);
@@ -47,7 +54,12 @@
       //      var strsel = selectedFrom ("xEdi"+nEd);
       //      console.log ("click strsel [" + strsel + "]");
       //      if (strsel && strsel !== '') {
-      //          jgast.AJAXPost ("searchStr", strsel);
+      //          //alert ("selected by " + (firstClick ? "mouse": "double click"));
+      //          // for whatever reason textarea selects additionally one space after the word 
+      //          // so we have to remove it manually in this case
+      //          if (!firstClick)
+      //             strsel = strsel.trimTail ();
+      //          jgast.AJAXPost ("searchStr", "", { 'ajaxREQ-Str': strsel });
       //      }
       //   }
       //
