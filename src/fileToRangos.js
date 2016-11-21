@@ -1,12 +1,23 @@
+
+// rename it to gFile to be able to test it without goRhino
+// (i.e. in a browser)
+//
 function gaFile ()
 {
-   var sabroso = 0;
-   var acu = ["juan pedro", "rancintales rango range", "soseba", "resiega", "planceta", "roma", "kina range", "pesca"];
+   var nL = 0;
+   var acu = ["first line", 
+              "second one()", 
+              "", 
+              "precious was empty", 
+              "end of this file"];
    this.readLine = function () {
-      return sabroso < acu.length ? acu[sabroso++]: null;
+      return nL < acu.length ? acu[nL++]: null;
    }
    this.fopen = function () {
       return true;
+   }
+   this.feof = function () {
+      return nL >= acu.length;
    }
    this.fclose = function () {
    }
